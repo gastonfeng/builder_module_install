@@ -31,7 +31,7 @@ class Module(models.Model):
             res = module_obj.import_zipfile(fp, force=force)
 
             return {'type': 'ir.actions.act_window_close'}
-        except KeyError, e:
+        except KeyError as e:
             raise UserWarning(_('Module Builder does not provide a generator for your current odoo version.'))
 
     @api.multi
