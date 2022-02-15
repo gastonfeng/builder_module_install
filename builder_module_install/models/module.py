@@ -10,7 +10,7 @@ class Module(models.Model):
 
     system_module_state = fields.Char('Module State', compute='_compute_system_module_state')
 
-    @api.one
+    # @api.one
     def _compute_system_module_state(self):
         module = self.env['ir.module.module'].search([('name', '=', self.name)])
         if module.id:
@@ -18,7 +18,7 @@ class Module(models.Model):
         else:
             self.system_module_state = 'missing'
 
-    @api.multi
+    # @api.multi
     def button_install(self, force=False):
         try:
 
@@ -34,11 +34,11 @@ class Module(models.Model):
         except KeyError as e:
             raise UserWarning(_('Module Builder does not provide a generator for your current odoo version.'))
 
-    @api.multi
+    # @api.multi
     def button_upgrade(self):
         self.button_install(True)
 
-    @api.multi
+    # @api.multi
     def button_uninstall(self):
         module = self.env['ir.module.module'].search([('name', '=', self.name)])
         if module.id:
